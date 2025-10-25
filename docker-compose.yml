@@ -1,0 +1,14 @@
+services:
+  dev:
+    build: .
+    volumes:
+      - type: bind
+        source: .
+        target: /app/
+      - type: volume
+        target: /app/node_modules
+    ports:
+     - "5174:5173"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
