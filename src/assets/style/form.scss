@@ -1,11 +1,15 @@
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@use "./media-queries" as mq;
+
+// .content {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 
 form {
-  width: 700px;
+  background: white;
+  max-width: 700px;
+  width: 100%;
   padding: 4rem;
   box-shadow: var(--box-shadow);
   border-radius: 3px;

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/7b20e7d8d0.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,53 +20,41 @@
   <body class="container">
     <header>
       <a class="header-brand" href="/index.html">Blog</a>
-      <nav>
+      <nav class="header-menu">
         <ul>
           <li><a class="header-nav active" href="/index.html">Accueil</a></li>
           <li>
             <a class="header-nav" href="/form/form.html">Créer un article</a>
           </li>
         </ul>
+        <div class="header-menu-icon"><i class="fa-solid fa-bars"></i></div>
       </nav>
     </header>
     <main class="content">
-      <img src="./assets/images/plateforme-tracker.png" />
-      <article>
-        <h2>Article1</h2>
-        <div class="article-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-          nesciunt tempora numquam qui, explicabo deserunt repellendus nam!
-          Laborum mollitia fuga in quaerat sint ea voluptatum, laboriosam
-          nostrum, unde porro facilis impedit magni voluptatem maiores!
-          Incidunt.
-        </div>
-        <div class="options">
-          <a href="#">éditer</a><a href="#">supprimer</a>
-        </div>
-      </article>
-      <article>
-        <h2>Article2</h2>
-        <div class="article-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-          tenetur laborum repellendus adipisci omnis ad voluptas doloribus
-          facilis sed veritatis!
-        </div>
-        <div class="options">
-          <a href="#">éditer</a><a href="#">supprimer</a>
-        </div>
-      </article>
-      <article>
-        <h2>Article3</h2>
-        <div class="article-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-          voluptatum temporibus, officia consectetur sequi culpa? Deserunt,
-          totam. Sequi, nostrum. A illo ratione neque architecto adipisci
-          commodi culpa delectus, minima blanditiis.
-        </div>
-        <div class="options">
-          <a href="#">éditer</a><a href="#">supprimer</a>
-        </div>
-      </article>
+      <div class="articles-container">
+        <article class="article">
+          <img
+            src="https://randomuser.me/api/portraits/women/90.jpg"
+            alt="fake author"
+          />
+          <h2>Article1</h2>
+          <!-- <div class="article-content"> -->
+          <p class="article-author">Auteur de l'article</p>
+          <p class="article-content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+            nesciunt tempora numquam qui, explicabo deserunt repellendus nam!
+            Laborum mollitia fuga in quaerat sint ea voluptatum, laboriosam
+            nostrum, unde porro facilis impedit magni voluptatem maiores!
+            Incidunt.
+          </p>
+
+          <!-- </div> -->
+          <div class="options">
+            <button class="btn btn-danger">Supprimer</button>
+            <button class="btn btn-primary">Modifier</button>
+          </div>
+        </article>
+      </div>
     </main>
     <footer>© Blog</footer>
   </body>

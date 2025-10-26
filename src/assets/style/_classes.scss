@@ -28,10 +28,16 @@
     background: white;
     color: var(--primary);
   }
+
+  &-danger {
+    border: 1px solid var(--error);
+    background: white;
+    color: var(--error);
+  }
 }
 
 .text {
-    &-error {
-        color: var(--error);
-    }
+  &-error {
+    color: var(--error);
+  }
 }

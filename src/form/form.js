@@ -1,5 +1,6 @@
 import "/assets/style/style.scss";
 import "/assets/style/form.scss";
+import "/assets/javascripts/topbar.js";
 
 console.log("form!");
 
@@ -35,7 +36,13 @@ form.addEventListener("submit", async (event) => {
 });
 
 function formIsValid(article) {
-  if (!article.author || !article.category || !article.content) {
+  if (
+    !article.author ||
+    !article.category ||
+    !article.content ||
+    !article.img ||
+    !article.title
+  ) {
     errors.push("Vous devez renseigner tous les champs");
   } else {
     errors = [];

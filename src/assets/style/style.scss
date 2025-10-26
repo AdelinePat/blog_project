@@ -24,12 +24,49 @@ header {
   justify-content: space-between;
   align-items: center;
 
+  nav {
+    position: relative;
+  }
+
   a {
     color: white;
   }
 
   ul {
     display: flex;
+
+    @include mq.xs {
+      display: none;
+    }
+  }
+
+  .header-menu-icon {
+    display: none;
+    font-size: 3.2rem;
+    color: white;
+    @include mq.xs {
+      display: inline-block;
+    }
+  }
+
+  .mobile-menu {
+    display: none;
+    box-shadow: var(--box-shadow);
+    position: absolute;
+    top: 9.6rem;
+    right: 1rem;
+    padding: 2.8rem 2rem;
+    width: 20rem;
+    background: white;
+    li {
+      margin: 2rem 0;
+      a {
+        color: var(--text);
+      }
+    }
+  }
+  .mobile-menu.open {
+    display: block;
   }
 
   .header-brand {
@@ -49,8 +86,12 @@ header {
 }
 
 .content {
-  grid-area: "content";
+  grid-area: content;
   padding: 20px;
+  background: var(--divider);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {

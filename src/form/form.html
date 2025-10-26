@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/7b20e7d8d0.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,7 +19,7 @@
   <body class="container">
     <header>
       <a class="header-brand" href="/index.html">Blog</a>
-      <nav>
+      <nav class="header-menu">
         <ul>
           <li><a class="header-nav" href="/index.html">Accueil</a></li>
           <li>
@@ -24,6 +28,7 @@
             >
           </li>
         </ul>
+        <div class="header-menu-icon"><i class="fa-solid fa-bars"></i></div>
       </nav>
     </header>
     <main class="content">
@@ -34,8 +39,16 @@
           <input type="text" name="author" id="author" />
         </div>
         <div class="form-group">
+          <label for="profile">Image de profil</label>
+          <input type="text" name="img" id="profile" />
+        </div>
+        <div class="form-group">
           <label for="category">Catégorie</label>
           <input type="text" name="category" id="category" />
+        </div>
+        <div class="form-group">
+          <label for="title">Titre de l'article</label>
+          <input type="text" name="title" id="title" />
         </div>
         <div class="form-group">
           <label for="article-content">Article</label>
