@@ -1,0 +1,63 @@
+@use "variables";
+@use "reset";
+@use "classes";
+@use "media-queries" as mq;
+@use "utils";
+@use "native-tag";
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid:
+    "header" auto
+    "content" 1fr
+    "footer" auto /
+    auto;
+}
+
+header {
+  grid-area: "header";
+  background: var(--dark);
+  padding: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    color: white;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  .header-brand {
+    font-size: 4rem;
+    font-weight: 700;
+  }
+
+  .header-nav {
+    font-size: 2rem;
+    padding: 0px 8px;
+  }
+
+  .active {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+}
+
+.content {
+  grid-area: "content";
+  padding: 20px;
+}
+
+footer {
+  grid-area: "footer";
+  padding: 20px;
+  background: var(--dark-grey);
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+}

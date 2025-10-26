@@ -4,20 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
     <script type="module" src="./index.js"></script>
   </head>
-  <body>
-    coucou
+  <body class="container">
     <header>
+      <a class="header-brand" href="/index.html">Blog</a>
       <nav>
         <ul>
-          <li><a href="./form/form.html">Formulaire</a></li>
-          <li>link2</li>
-          <li>link3</li>
+          <li><a class="header-nav active" href="/index.html">Accueil</a></li>
+          <li>
+            <a class="header-nav" href="/form/form.html">Créer un article</a>
+          </li>
         </ul>
       </nav>
     </header>
-    <main>
+    <main class="content">
+      <img src="./assets/images/plateforme-tracker.png" />
       <article>
         <h2>Article1</h2>
         <div class="article-content">
@@ -55,6 +64,6 @@
         </div>
       </article>
     </main>
-    <footer>footer :D</footer>
+    <footer>© Blog</footer>
   </body>
 </html>

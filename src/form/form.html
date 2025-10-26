@@ -4,20 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <script type="module" src="../form/form.js"></script>
   </head>
-  <body>
-    coucou
+  <body class="container">
     <header>
+      <a class="header-brand" href="/index.html">Blog</a>
       <nav>
         <ul>
-          <li><a href="../">Accueil</a></li>
-          <li>link2</li>
-          <li>link3</li>
+          <li><a class="header-nav" href="/index.html">Accueil</a></li>
+          <li>
+            <a class="header-nav active" href="/form/form.html"
+              >Créer un article</a
+            >
+          </li>
         </ul>
       </nav>
     </header>
-    <main></main>
-    <footer>footer :D</footer>
+    <main class="content">
+      <form action="">
+        <h2 class="title-underline">Ajouter un article</h2>
+        <div class="form-group">
+          <label for="author">Auteur</label>
+          <input type="text" name="author" id="author" />
+        </div>
+        <div class="form-group">
+          <label for="category">Catégorie</label>
+          <input type="text" name="category" id="category" />
+        </div>
+        <div class="form-group">
+          <label for="article-content">Article</label>
+          <textarea name="content" id="article-content"></textarea>
+        </div>
+        <div class="form-btn-container">
+          <button class="btn btn-secondary">Annuler</button>
+          <button class="btn btn-primary">Sauvegarder</button>
+        </div>
+      </form>
+    </main>
+    <footer>© Blog</footer>
   </body>
 </html>
