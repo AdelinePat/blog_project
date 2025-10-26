@@ -4,28 +4,53 @@ import "/assets/style/form.scss";
 console.log("form!");
 
 const form = document.querySelector("form");
+const errorElement = document.querySelector("#errors");
+let errors = [];
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(form);
-  // console.log(formData);
+  const article = Object.fromEntries(formData.entries());
+  if (formIsValid(article)) {
+    try {
+      const json = JSON.stringify(article);
 
-  const entries = formData.entries();
-  //   console.log(entries);
-  //   for (let entry of entries) {
-  //     console.log(entry);
-  //   }
+      const response = await fetch(
+        "https://restapi.fr/api/dymajscertificationarticles",
+        {
+          method: "POST",
+          body: json,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-  //   const obj = Array.from(entries).reduce( (acc, value) => {
-  //     acc[value[0]] = value[1];
-  //     return acc;
-  //   }, {})
-
-  const obj = Object.fromEntries(entries);
-  const json = JSON.stringify(obj);
-  console.log(json);
-  console.log(obj);
-
-  //   const arrayData = Array.from(entries);
-  //   console.log(arrayData);
+      const body = await response.json();
+      console.log(body);
+    } catch (e) {
+      console.error("e: ", e);
+    }
+  }
 });
+
+function formIsValid(article) {
+  if (!article.author || !article.category || !article.content) {
+    errors.push("Vous devez renseigner tous les champs");
+  } else {
+    errors = [];
+  }
+
+  if (errors.length) {
+    let errorHTML = "";
+    errors.forEach((element) => {
+      errorHTML += `<li>${element}</li>`;
+    });
+
+    errorElement.innerHTML = errorHTML;
+    return false;
+  } else {
+    errorElement.innerHTML = "";
+    return true;
+  }
+}
