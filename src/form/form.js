@@ -6,7 +6,46 @@ console.log("form!");
 
 const form = document.querySelector("form");
 const errorElement = document.querySelector("#errors");
+const cancelBtn = document.querySelector(".btn-secondary");
 let errors = [];
+let articleId;
+
+async function initForm() {
+  const params = new URL(location.href);
+  // console.log("params", params);
+  articleId = params.searchParams.get("id");
+  if (articleId) {
+    const response = await fetch(
+      `https://restapi.fr/api/dymajscertificationarticles/${articleId}`
+    );
+    if (response.status < 300) {
+      const article = await response.json();
+      fillForm(article);
+    }
+    // console.log(response);
+  }
+}
+
+function fillForm(article) {
+  const authorInput = document.querySelector("#author");
+  const imgInput = document.querySelector("#profile");
+  const categoryInput = document.querySelector("#category");
+  const titleInput = document.querySelector("#title");
+  const contentInput = document.querySelector("#article-content");
+
+  authorInput.value = article.author || "";
+  imgInput.value = article.img || "";
+  categoryInput.value = article.category || "";
+  titleInput.value = article.title || "";
+  contentInput.value = article.content || "";
+}
+
+// console.log("articleid", articleId);
+initForm();
+
+cancelBtn.addEventListener("click", () => {
+  location.assign("/index.html");
+});
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -15,8 +54,20 @@ form.addEventListener("submit", async (event) => {
   if (formIsValid(article)) {
     try {
       const json = JSON.stringify(article);
-
-      const response = await fetch(
+      let response;
+      if (articleId) {
+        response = await fetch(
+        `https://restapi.fr/api/dymajscertificationarticles/${articleId}`,
+        {
+          method: "PATCH",
+          body: json,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      } else {
+        response = await fetch(
         "https://restapi.fr/api/dymajscertificationarticles",
         {
           method: "POST",
@@ -26,9 +77,14 @@ form.addEventListener("submit", async (event) => {
           },
         }
       );
+      }
+      
+      if (response.status < 300) {
+        location.assign("/index.html");
+      }
 
-      const body = await response.json();
-      console.log(body);
+      // const body = await response.json();
+      // console.log(body);
     } catch (e) {
       console.error("e: ", e);
     }
@@ -36,6 +92,7 @@ form.addEventListener("submit", async (event) => {
 });
 
 function formIsValid(article) {
+  errors = [];
   if (
     !article.author ||
     !article.category ||

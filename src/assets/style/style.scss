@@ -91,7 +91,8 @@ header {
   background: var(--divider);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 4.8rem;
 }
 
 footer {

@@ -2,19 +2,17 @@ console.log("topbar!");
 
 const iconMobile = document.querySelector(".header-menu-icon");
 const headerMenu = document.querySelector(".header-menu");
+
 let isMenuOpen = false;
 let mobileMenuDOM;
 
+
 function createMobileMenu() {
-  //   mobileMenuDOM = document.createElement("ul");
-  //   mobileMenuDOM.classList.add("mobile-menu");
   mobileMenuDOM = headerMenu.querySelector("ul").cloneNode(true);
   mobileMenuDOM.classList.add("mobile-menu");
   mobileMenuDOM.addEventListener("click", (event) => {
     event.stopPropagation();
   });
-  //   mobileMenuDOM.append(headerMenu.querySelector("ul").cloneNode(true));
-  //   headerMenu.append(mobileMenuDOM);
   headerMenu.append(mobileMenuDOM);
 }
 
