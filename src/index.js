@@ -4,8 +4,16 @@ import "/assets/javascripts/topbar.js";
 
 const articleContainerElement = document.querySelector(".articles-container");
 const categoriesContainerElement = document.querySelector(".categories");
+const selectElement = document.querySelector("select");
 let filter;
 let articles;
+let sortBy = "desc";
+
+selectElement.addEventListener("change", () => {
+  sortBy = selectElement.value;
+  fetchArticle();
+  console.log(articles);
+});
 
 function createArticles() {
   const articlesDOM = articles
@@ -82,6 +90,10 @@ function displayMenuCategories(articlesArray) {
     li.innerHTML = `${categoryElem.at(0)}  ( <strong>${categoryElem.at(
       1
     )}</strong> )`;
+    if (categoryElem.at(0) === filter) {
+      li.classList.add("active");
+      createArticles();
+    }
     li.addEventListener("click", (event) => {
       if (filter === categoryElem.at(0)) {
         filter = null;
@@ -125,7 +137,7 @@ function createMenuCategories() {
 async function fetchArticle() {
   try {
     const response = await fetch(
-      "https://restapi.fr/api/dymajscertificationarticles"
+      `https://restapi.fr/api/dymajscertificationarticles?sort=createdAt:${sortBy}`
     );
     articles = await response.json();
     createArticles();
