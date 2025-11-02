@@ -4,22 +4,32 @@ import "/assets/javascripts/topbar.js";
 
 const articleContainerElement = document.querySelector(".articles-container");
 const categoriesContainerElement = document.querySelector(".categories");
+let filter;
+let articles;
 
-function createArticles(articles) {
-  const articlesDOM = articles.map((article) => {
-    const articleDOM = document.createElement("article");
-    articleDOM.classList.add("article");
-    articleDOM.innerHTML = `
+function createArticles() {
+  const articlesDOM = articles
+    .filter((article) => {
+      if (filter) {
+        return filter === article.category;
+      } else {
+        return true;
+      }
+    })
+    .map((article) => {
+      const articleDOM = document.createElement("article");
+      articleDOM.classList.add("article");
+      articleDOM.innerHTML = `
             <img src="${article.img}" alt="fake author">
             <h2>${article.title}</h2>
             <p class="article-author">${article.author} - ${new Date(
-      article.createdAt
-    ).toLocaleDateString("fr-FR", {
-      weekday: "long",
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    })}</p>
+        article.createdAt
+      ).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      })}</p>
             <p class="article-content">${article.content}</p>
 
             <div class="options">
@@ -30,8 +40,8 @@ function createArticles(articles) {
                   article._id
                 } class="btn btn-primary">Modifier</button>
             </div>`;
-    return articleDOM;
-  });
+      return articleDOM;
+    });
 
   articleContainerElement.innerHTML = "";
   articleContainerElement.append(...articlesDOM);
@@ -72,17 +82,29 @@ function displayMenuCategories(articlesArray) {
     li.innerHTML = `${categoryElem.at(0)}  ( <strong>${categoryElem.at(
       1
     )}</strong> )`;
+    li.addEventListener("click", (event) => {
+      if (filter === categoryElem.at(0)) {
+        filter = null;
+        createArticles();
+      } else {
+        filter = categoryElem.at(0);
+        liElements.forEach((li) => {
+          li.classList.remove("active");
+        });
+        li.classList.add("active");
+        createArticles();
+      }
+
+      console.log(filter);
+    });
     return li;
   });
-  console.log("allo", liElements);
   categoriesContainerElement.innerHTML = "";
   categoriesContainerElement.append(...liElements);
 }
 
-function createMenuCategories(articles) {
-  console.log(articles);
+function createMenuCategories() {
   const categories = articles.reduce((accumulator, article) => {
-    console.log(accumulator[article.category]);
     if (accumulator[article.category]) {
       accumulator[article.category]++;
     } else {
@@ -90,12 +112,14 @@ function createMenuCategories(articles) {
     }
     return accumulator;
   }, {});
-  // console.log(categories);
-  const categoriesArray = Object.keys(categories).map((category) => {
-    return [category, categories[category]];
-  });
+  const categoriesArray = Object.keys(categories)
+    .map((category) => {
+      return [category, categories[category]];
+    })
+    .sort((category1, category2) => {
+      return category1.at(0).localeCompare(category2.at(0));
+    });
   displayMenuCategories(categoriesArray);
-  // console.log(categoriesArray);
 }
 
 async function fetchArticle() {
@@ -103,9 +127,9 @@ async function fetchArticle() {
     const response = await fetch(
       "https://restapi.fr/api/dymajscertificationarticles"
     );
-    const articles = await response.json();
-    createArticles(articles);
-    createMenuCategories(articles);
+    articles = await response.json();
+    createArticles();
+    createMenuCategories();
   } catch (e) {
     console.log("e ", e);
   }
