@@ -1,6 +1,7 @@
-import "/assets/style/style.scss";
-import "/assets/style/index.scss";
-import "/assets/javascripts/topbar.js";
+import "./assets/style/style.scss";
+import "./assets/style/index.scss";
+import "./assets/javascripts/topbar.js";
+import { openModal } from "./assets/javascripts/modal.js";
 
 const articleContainerElement = document.querySelector(".articles-container");
 const categoriesContainerElement = document.querySelector(".categories");
@@ -64,21 +65,29 @@ function createArticles() {
       location.assign(`/form/form.html?id=${articleId}`);
     });
   });
+
   deleteButtons.forEach((button) => {
     button.addEventListener("click", async (event) => {
-      try {
-        const target = event.target;
-        const articleId = target.dataset.id;
-        const response = await fetch(
-          `https://restapi.fr/api/dymajscertificationarticles/${articleId}`,
-          {
-            method: "DELETE",
-          }
-        );
-        const body = await response.json();
-        fetchArticle();
-      } catch (e) {
-        console.log("e ", e);
+      console.log("supprimer!");
+      const result = await openModal(
+        "Etes vous sûr de vouloir supprimer cet article ?"
+      );
+      console.log(result);
+      if (result === true) {
+        try {
+          const target = event.target;
+          const articleId = target.dataset.id;
+          const response = await fetch(
+            `https://restapi.fr/api/dymajscertificationarticles/${articleId}`,
+            {
+              method: "DELETE",
+            }
+          );
+          const body = await response.json();
+          fetchArticle();
+        } catch (e) {
+          console.log("e ", e);
+        }
       }
     });
   });
