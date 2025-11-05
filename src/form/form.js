@@ -1,6 +1,7 @@
 import "/assets/style/style.scss";
 import "/assets/style/form.scss";
 import "/assets/javascripts/topbar.js";
+import { openModal } from "/assets/javascripts/modal.js";
 
 console.log("form!");
 
@@ -43,8 +44,13 @@ function fillForm(article) {
 // console.log("articleid", articleId);
 initForm();
 
-cancelBtn.addEventListener("click", () => {
-  location.assign("/index.html");
+cancelBtn.addEventListener("click", async () => {
+  const result = await openModal(
+    "Si vous quittez la page, vous allez perdre votre article. Êtes vous sûr de continuer ?"
+  );
+  if (result) {
+    location.assign("/index.html");
+  }
 });
 
 form.addEventListener("submit", async (event) => {
@@ -57,28 +63,28 @@ form.addEventListener("submit", async (event) => {
       let response;
       if (articleId) {
         response = await fetch(
-        `https://restapi.fr/api/dymajscertificationarticles/${articleId}`,
-        {
-          method: "PATCH",
-          body: json,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+          `https://restapi.fr/api/dymajscertificationarticles/${articleId}`,
+          {
+            method: "PATCH",
+            body: json,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
       } else {
         response = await fetch(
-        "https://restapi.fr/api/dymajscertificationarticles",
-        {
-          method: "POST",
-          body: json,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+          "https://restapi.fr/api/dymajscertificationarticles",
+          {
+            method: "POST",
+            body: json,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
       }
-      
+
       if (response.status < 300) {
         location.assign("/index.html");
       }
