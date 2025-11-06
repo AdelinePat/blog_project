@@ -33,6 +33,8 @@ docker compose stop
 ```bash
 docker compose exec dev bash -c "npm run build && npm run preview"
 ```
+Open the project in `http://localhost:4173/`.
+
 *Note: Unless you run this command, you only get the development environment.*
 
 4. Delete everything when you are done
