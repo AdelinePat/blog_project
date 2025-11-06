@@ -6,6 +6,7 @@ import { openModal } from "./assets/javascripts/modal.js";
 const articleContainerElement = document.querySelector(".articles-container");
 const categoriesContainerElement = document.querySelector(".categories");
 const selectElement = document.querySelector("select");
+
 let filter;
 let articles;
 let sortBy = "desc";
