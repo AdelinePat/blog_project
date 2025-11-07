@@ -4,7 +4,6 @@ import "./assets/javascripts/topbar.js";
 import { openModal } from "./assets/javascripts/modal.js";
 import { fakeArticles } from "./assets/javascripts/article.js";
 
-console.log("INDEX.JS !!");
 const articleContainerElement = document.querySelector(".articles-container");
 const categoriesContainerElement = document.querySelector(".categories");
 const selectElement = document.querySelector("select");
@@ -16,7 +15,6 @@ let sortBy = "desc";
 selectElement.addEventListener("change", () => {
   sortBy = selectElement.value;
   fetchArticle();
-  console.log(articles);
 });
 
 function createArticles() {
@@ -146,28 +144,11 @@ function createMenuCategories() {
   displayMenuCategories(categoriesArray);
 }
 
-// async function fetchArticle() {
-//   try {
-//     const response = await fetch(
-//       `https://restapi.fr/api/dymajscertificationarticles?sort=createdAt:${sortBy}`
-//     );
-//     console.log("in fetcharticles");
-//     articles = await response.json();
-//     createArticles();
-//     createMenuCategories();
-//   } catch (e) {
-//     console.log("e ", e);
-//   }
-// }
-
 async function fetchArticle() {
-  console.log("1. in fetcharticle");
   try {
     let response = await fetch(
       `https://restapi.fr/api/dymajscertificationarticles?sort=createdAt:${sortBy}`
     );
-    console.log("2. after timeout fetching article");
-    console.log("2.1", response);
     articles = await response.json();
     if (articles.length === 0) {
       try {
@@ -185,31 +166,21 @@ async function fetchArticle() {
             }
           );
         }
-        console.log("4. after fakearticle loop");
         response = await fetch(
           `https://restapi.fr/api/dymajscertificationarticles?sort=createdAt:${sortBy}`
         );
         articles = await response.json();
-        console.log("5. fetch after post");
       } catch (postError) {
         console.log("Failed to repopulate API", postError);
       }
     }
-    console.log("6. before .json()");
-    console.log("6.1", articles);
-    console.log("7. after .json()");
   } catch (e) {
     // Timeout or network error
     console.log("Request failed or timed out. Using fake articles.");
     // articles = fakeArticles;
   }
-
-  console.log("8. before createArticle");
-
   createArticles();
   createMenuCategories();
-  console.log("9. end of fetcharticle");
 }
 
-console.log("0. before fetcharticle");
 fetchArticle();
