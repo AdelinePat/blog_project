@@ -60,10 +60,8 @@ Using vite, you usually need to go to `http://localhost:5173`, but as I have alr
     ┣ index.html
     ┣ index.js
     ┗ 📂 assets
-       ┣ 📂 images
-       ┃  ┗ plateforme-tracker.png
        ┣ 📂 javascripts
-       ┃  ┣ articles.js
+       ┃  ┣ articles.js # fake data
        ┃  ┣ modal.js
        ┃  ┗ topbar.js
        ┣ 📂 style
