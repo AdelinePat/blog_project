@@ -3,14 +3,6 @@ import { resolve } from "path";
 
 export default defineConfig({
   root: "./src",
-  // server: {
-  //   host: true, // 0.0.0.0
-  //   port: 5173,
-  //   hmr: {
-  //     host: "localhost", // or your Docker host IP
-  //     port: 5174,
-  //   },
-  // },
   build: {
     outDir: "../dist",
     emptyOutDir: true,
