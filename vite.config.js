@@ -21,4 +21,14 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    host: "0.0.0.0", // container listens on all interfaces
+    watch: {
+      usePolling: true, // Windows + Docker fix
+      interval: 100,
+    },
+    hmr: {
+      host: "localhost", // browser connects to localhost: mapped by Docker
+    },
+  },
 });
